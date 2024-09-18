@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import AppNavBar from "@/components/app-navbar";
 import Providers from "@/components/providers";
 
 import "./globals.css";
+import Loading from "./loading";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,7 +26,9 @@ export default function RootLayout({
       <body className="h-screen w-screen">
         <Providers>
           <AppNavBar />
-          <main className="flex-grow overflow-auto">{children}</main>
+          <main className="flex-grow overflow-auto">
+            <Suspense fallback={<Loading />}>{children}</Suspense>
+          </main>
         </Providers>
       </body>
     </html>
