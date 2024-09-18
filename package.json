@@ -8,18 +8,23 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier src/ --write",
-    "prepare": "husky"
+    "prepare": "husky",
+    "check-types": "tsc --project tsconfig.json --pretty --noEmit"
   },
   "dependencies": {
     "@nextui-org/react": "^2.4.8",
+    "@t3-oss/env-nextjs": "^0.11.1",
+    "eslint-plugin-n": "^17.10.3",
     "framer-motion": "^11.5.4",
     "husky": "^9.1.6",
+    "jiti": "^1.21.6",
     "lint-staged": "^15.2.10",
     "lucide-react": "^0.441.0",
     "next": "14.2.12",
     "next-themes": "^0.3.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
