@@ -24,7 +24,10 @@ export default function AppNavBar() {
 
   let menuItems = [{ label: "Home", href: "/" }];
 
-  const authMenuItems = [{ label: "Profile", href: "profile" }];
+  const authMenuItems = [
+    { label: "Profile", href: "/profile" },
+    { label: "Guestbook", href: "/guestbook" },
+  ];
 
   if (status === "authenticated") {
     menuItems = [...menuItems, ...authMenuItems];
