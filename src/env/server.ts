@@ -1,3 +1,4 @@
+/* eslint-disable n/no-process-env */
 import { createEnv } from "@t3-oss/env-nextjs";
 import { config } from "dotenv";
 import { expand } from "dotenv-expand";
@@ -8,10 +9,7 @@ expand(config());
 export const env = createEnv({
   server: {
     NODE_ENV: z.enum(["development", "production"]),
-    NEXTAUTH_URL: z.string().url(),
-    NEXTAUTH_SECRET: z.string(),
-    GOOGLE_CLIENT_ID: z.string(),
-    GOOGLE_CLIENT_SECRET: z.string(),
+    CLERK_SECRET_KEY: z.string(),
     DB_HOST: z.string(),
     DB_USER: z.string(),
     DB_PASSWORD: z.string(),
@@ -24,6 +22,9 @@ export const env = createEnv({
       .transform((s) => s === "true")
       .optional(),
   },
+  client: {
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string().min(1),
+  },
   onValidationError: (error: ZodError) => {
     console.error(
       "❌ Invalid environment variables:",
@@ -33,6 +34,17 @@ export const env = createEnv({
   },
   emptyStringAsUndefined: true,
 
-  // eslint-disable-next-line n/no-process-env
-  experimental__runtimeEnv: process.env,
+  runtimeEnv: {
+    NODE_ENV: process.env.NODE_ENV,
+    CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+    DB_HOST: process.env.DB_HOST,
+    DB_USER: process.env.DB_USER,
+    DB_PASSWORD: process.env.DB_PASSWORD,
+    DB_NAME: process.env.DB_NAME,
+    DB_PORT: process.env.DB_PORT,
+    DATABASE_URL: process.env.DATABASE_URL,
+    DB_MIGRATING: process.env.DB_MIGRATING,
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
+      process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+  },
 });
